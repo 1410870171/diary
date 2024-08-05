@@ -22,7 +22,7 @@ function verify() {
     if (jwtToken) {
       // 判断 token 是否合法
       try {
-        const decoded = jwt.verify(jwtToken, '123456')
+        const decoded = jwt.verify(jwtToken, secretKey)
         if (decoded.id) { // 合法
           ctx.userId = decoded.id
           await next()
