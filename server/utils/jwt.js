@@ -1,10 +1,19 @@
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto');
 
-//生成token
+// 生成随机密钥
+function generateSecretKey() {
+  return crypto.randomBytes(64).toString('hex'); // 生成一个64字节的随机密钥
+}
+
+// 密钥
+const secretKey = generateSecretKey();
+
+// 生成 token
 function sign(option) {
-  return jwt.sign(option, '123456', {
-    expiresIn: 86400   // 一天后后期
-  })
+  return jwt.sign(option, secretKey, {
+    expiresIn: 86400 // 一天后过期
+  });
 }
 //检验token
 function verify() {
